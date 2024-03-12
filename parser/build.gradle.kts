@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation("it.skrape:skrapeit:1.1.5")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 
