@@ -10,7 +10,6 @@ data class MatchEntry(
     val matchmakingType: String,
     val gameType: String,
     val duration: String,
-    val partyStatus: String,
     val role: String,
     val lane: String,
     val kda: String
@@ -24,9 +23,8 @@ fun MatchEntry.toMatch(): Match {
         matchmakingType = MatchmakingType.Ranked,
         gameType = GameType.AllPick,
         duration = 45.minutes,
-        partyStatus = PartyStatus.SoloQueue,
         role = Role.Support,
-        lane = Lane.Top,
+        lane = Lane.Offlane,
         kda = Kda(kills = 0, deaths = 100, assists = 0)
     )
 }

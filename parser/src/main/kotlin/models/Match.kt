@@ -8,13 +8,9 @@ enum class MatchmakingType { Ranked, Unranked }
 
 enum class GameType { AllPick, Turbo, SingleDraft, Other }
 
-enum class PartyStatus(val members: Int) {
-    SoloQueue(1), DuoQueue(2), Party3(3), Party4(4), FullStack(5)
-}
-
 enum class Role { Core, Support }
 
-enum class Lane { Top, Middle, Bottom }
+enum class Lane { Easy, Middle, Offlane }
 
 data class Kda(val kills: Int, val deaths: Int, val assists: Int)
 
@@ -25,7 +21,6 @@ data class Match(
     val matchmakingType: MatchmakingType,
     val gameType: GameType,
     val duration: Duration,
-    val partyStatus: PartyStatus,
     val role: Role?,
     val lane: Lane?,
     val kda: Kda

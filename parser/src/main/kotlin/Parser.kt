@@ -5,8 +5,6 @@ import it.skrape.core.htmlDocument
 import it.skrape.fetcher.HttpFetcher
 import it.skrape.fetcher.extractIt
 import it.skrape.fetcher.skrape
-import it.skrape.selects.html5.a
-import it.skrape.selects.html5.body
 
 class Parser {
     class Entries {
@@ -25,25 +23,23 @@ class Parser {
                         }
 
                         rows.forEach {
-                            val hero = it.findFirst("td.cell-large a") { text }
-                            val rank = it.findFirst("td.cell-large div") { text }
-                            val result = it.findByIndex(3, "td") { findFirst("a") { text } }
-                            val matchmakingType = it.findByIndex(4, "td") { ownText }
-                            val gameType = it.findFirst("td.r-none-mobile div") { text }
-
-                            entries.body.add(
-                                MatchEntry(
-                                    hero = hero,
-                                    rank = rank,
-                                    result = result,
-                                    matchmakingType = matchmakingType,
-                                    gameType = gameType,
-                                    duration = "",
-                                    partyStatus = "",
-                                    role = "",
-                                    lane = "",
-                                    kda = ""
-                                )
+                            entries.body.add(MatchEntry(hero = it.findFirst("td.cell-large a") { text },
+                                rank = it.findFirst("td.cell-large div") { text },
+                                result = it.findByIndex(3, "td") { findFirst("a") { text } },
+                                matchmakingType = it.findByIndex(4, "td") { ownText },
+                                gameType = it.findFirst("td.r-none-mobile div") { text },
+                                duration = it.findByIndex(5, "td") { ownText },
+                                role = try {
+                                    it.findFirst(".role-icon") { attribute("title") }
+                                } catch (_: Exception) {
+                                    ""
+                                },
+                                lane = try {
+                                    it.findFirst(".lane-icon") { attribute("title") }
+                                } catch (_: Exception) {
+                                    ""
+                                },
+                                kda = it.findFirst(".kda-record") { text })
                             )
                         }
 
