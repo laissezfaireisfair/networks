@@ -1,8 +1,8 @@
 package and.parser
 
-import and.parser.webScheme.MatchEntry
 import and.parser.webScheme.toMatch
 
 fun main() {
-    listOf<MatchEntry>().map { it.toMatch() }.forEach { println(it) }
+    val playerId = 403153826
+    Parser.getMatchEntries(playerId).forEach { println(it) }
 }
