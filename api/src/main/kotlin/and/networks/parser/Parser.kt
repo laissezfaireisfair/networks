@@ -11,9 +11,9 @@ class Parser {
     }
 
     companion object {
-        fun getMatchEntries(playerId: Int): List<MatchEntry> {
+        fun getMatchEntries(playerId: Int, page: Int): List<MatchEntry> {
             return skrape(HttpFetcher) {
-                request { url = "https://ru.dotabuff.com/players/$playerId/matches" }
+                request { url = "https://ru.dotabuff.com/players/$playerId/matches?enhance=overview&page=$page" }
 
                 extractIt<Entries> { entries ->
                     htmlDocument {

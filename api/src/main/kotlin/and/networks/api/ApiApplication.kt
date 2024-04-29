@@ -20,9 +20,9 @@ fun main(args: Array<String>) {
 @RestController
 @RequestMapping("/api/v1/matches")
 class MatchesController {
-    @GetMapping("get/{playerId}")
-    fun getMatches(@PathVariable playerId: Int): List<Match> {
-        return Parser.getMatchEntries(playerId).mapNotNull {
+    @GetMapping("get/{playerId}/{page}")
+    fun getMatches(@PathVariable playerId: Int, @PathVariable page: Int): List<Match> {
+        return Parser.getMatchEntries(playerId, page).mapNotNull {
                 try {
                     it.toMatch()
                 } catch (exception: Exception) {
